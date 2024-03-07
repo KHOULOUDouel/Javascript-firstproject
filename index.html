@@ -17,10 +17,25 @@
       { name: 'Growlithe', height: 0.7, types: ['ghost'] },
     ];
 
-    for (let i = 0; i < pokemonList.length; i++) {
-      let pokemon = pokemonList[i];
-      document.write(`<p>${pokemon.name} height: ${pokemon.height}</p>`);
-    }
+
+    
+      for (let i = 0; i < pokemonList.length; i++) {
+        let pokemon = pokemonList[i];
+
+        // Check if the height is above a certain value
+        let isSmall = pokemon.height < 0.6;
+
+        // Use document.write() to display the Pokémon with name and height
+        document.write(`<p>${pokemon.name} (height: ${pokemon.height})`);
+
+        // Add a note if the height is above a certain value
+        if (isSmall) {
+            document.write(' - Wow, that’s big!');
+        }
+
+      }
+    
+
 
   </script>
   <script src="./js/scripts.js"></script>
