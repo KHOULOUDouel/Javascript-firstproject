@@ -9,6 +9,20 @@
 </head>
 
 <body>
+  <script>
+    let pokemonList = [
+      { name: 'Charizard', height: 1, types: ['poison'] },
+      { name: 'Pikachu', height: 0.4, types: ['grass'] },
+      { name: 'Clefairy', height: 0.6, types: ['normal'] },
+      { name: 'Growlithe', height: 0.7, types: ['ghost'] },
+    ];
+
+    for (let i = 0; i < pokemonList.length; i++) {
+      let pokemon = pokemonList[i];
+      document.write(`<p>${pokemon.name} height: ${pokemon.height}</p>`);
+    }
+
+  </script>
   <script src="./js/scripts.js"></script>
 </body>
 
