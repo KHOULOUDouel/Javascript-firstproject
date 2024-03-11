@@ -9,7 +9,7 @@ let pokemonList = [
 // create a for loop that iterates over each item in pokemonList
 let pokemon = pokemonList[i];
  for (let i = 0; i < pokemonList.length; i++) {
-    onsole.log(`Name: ${pokemon.name}, Height: ${pokemon.height}m, Types: ${pokemon.types}`);
+    onsole.log(`Name: ${pokemon.name}, Height: ${pokemon.height}m, types: ${pokemon.types}`);
  }
 
 
