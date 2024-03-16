@@ -22,3 +22,8 @@ let pokemonRepository = (function() {
     getAll: getAll
   };
 })();
+
+// Use forEach loop to iterate over each Pokémon in the repository
+pokemonRepository.getAll().forEach(function(pokemon) {
+  let isTall = pokemon.height > 0.6;
+
