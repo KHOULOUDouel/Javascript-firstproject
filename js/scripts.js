@@ -16,6 +16,6 @@ for (let i = 0; i < pokemonList.length; i++) {
 
   // Add a note if the height is above a certain value
   if (isTall) {
-    document.write(" - Wow, that’s big!");
+    document.write(" : Wow, that’s big!");
   }
 }
