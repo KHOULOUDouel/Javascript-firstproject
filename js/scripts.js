@@ -6,3 +6,12 @@ let pokemonRepository = (function() {
     { name: "Clefairy", height: 0.6, types: ["normal"] },
     { name: "Growlithe", height: 0.7, types: ["ghost"] },
   ];
+
+  // Define add and getAll functions
+  function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
+
+  function getAll() {
+    return pokemonList;
+  }
