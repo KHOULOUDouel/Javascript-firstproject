@@ -15,3 +15,10 @@ let pokemonRepository = (function() {
   function getAll() {
     return pokemonList;
   }
+
+  // Return an object with add and getAll functions as keys
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
