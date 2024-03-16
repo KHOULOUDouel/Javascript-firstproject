@@ -5,10 +5,7 @@ let pokemonList = [
   { name: "Growlithe", height: 0.7, types: ["ghost"] },
 ];
 
-for (let i = 0; i < pokemonList.length; i++) {
-  let pokemon = pokemonList[i];
-
-  // Check if the height is above a certain value
+pokemonList.forEach(function(pokemon) {
   let isTall = pokemon.height > 0.6;
 
   // Use document.write() to display the Pokémon with name and height
