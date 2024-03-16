@@ -1,3 +1,5 @@
+(function() {
+
 let pokemonList = [
   { name: "Charizard", height: 1, types: ["poison"] },
   { name: "Pikachu", height: 0.4, types: ["grass"] },
@@ -16,3 +18,5 @@ pokemonList.forEach(function(pokemon) {
     document.write(" : Wow, that’s big!");
   }
 }
+
+})();
