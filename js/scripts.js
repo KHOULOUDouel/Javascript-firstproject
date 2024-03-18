@@ -30,4 +30,8 @@ pokemonRepository.getAll().forEach(function(pokemon) {
   // Use document.write() to display the Pokémon with name and height
   document.write(`<p>${pokemon.name} (height: ${pokemon.height})`);
 
-  
+  // Add a note if the height is above a certain value
+  if (isTall) {
+    document.write(" : Wow, that’s big!");
+  }
+});
