@@ -27,3 +27,7 @@ let pokemonRepository = (function() {
 pokemonRepository.getAll().forEach(function(pokemon) {
   let isTall = pokemon.height > 0.6;
 
+  // Use document.write() to display the Pokémon with name and height
+  document.write(`<p>${pokemon.name} (height: ${pokemon.height})`);
+
+  
