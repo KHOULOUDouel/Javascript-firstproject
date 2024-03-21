@@ -40,3 +40,6 @@ pokemonRepository.getAll().forEach(function(pokemon) {
 function add(pokemon) {
   // Check if the parameter is an object
   if (typeof pokemon === 'object' && pokemon !== null) {
+    //  } else {
+    pokemonList.push(pokemon);
+  } else {
