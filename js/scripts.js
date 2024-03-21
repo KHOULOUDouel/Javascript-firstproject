@@ -43,3 +43,7 @@ function add(pokemon) {
     //  } else {
     pokemonList.push(pokemon);
   } else {
+    // Log an error if the parameter is not an object
+    console.error('Invalid argument. Only objects can be added to the pokemonList.');
+  }
+}
