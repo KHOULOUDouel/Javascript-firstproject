@@ -38,4 +38,5 @@ pokemonRepository.getAll().forEach(function(pokemon) {
 
 // Define add function
 function add(pokemon) {
-  
+  // Check if the parameter is an object
+  if (typeof pokemon === 'object' && pokemon !== null) {
