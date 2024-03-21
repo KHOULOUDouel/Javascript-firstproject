@@ -52,4 +52,6 @@ function add(pokemon) {
 function add(pokemon) {
   // Check if the parameter is an object and contains all expected keys
   if (typeof pokemon === 'object' && pokemon !== null && 'name' in pokemon && 'height' in pokemon && 'types' in pokemon) {
-    
+    // Add the pokemon to the pokemonList
+    pokemonList.push(pokemon);
+  } else {
