@@ -50,3 +50,6 @@ function add(pokemon) {
 
 // Define add function
 function add(pokemon) {
+  // Check if the parameter is an object and contains all expected keys
+  if (typeof pokemon === 'object' && pokemon !== null && 'name' in pokemon && 'height' in pokemon && 'types' in pokemon) {
+    
