@@ -35,3 +35,7 @@ pokemonRepository.getAll().forEach(function(pokemon) {
     document.write(" : Wow, that’s big!");
   }
 });
+
+// Define add function
+function add(pokemon) {
+  
