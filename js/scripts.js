@@ -47,3 +47,6 @@ function add(pokemon) {
     console.error('Invalid argument. Only objects can be added to the pokemonList.');
   }
 }
+
+// Define add function
+function add(pokemon) {
