@@ -55,3 +55,7 @@ function add(pokemon) {
     // Add the pokemon to the pokemonList
     pokemonList.push(pokemon);
   } else {
+    // Log an error if the parameter is not valid
+    console.error('Invalid argument. The parameter must be an object containing all expected keys: name, height, and types.');
+  }
+}
