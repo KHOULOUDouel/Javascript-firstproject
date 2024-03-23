@@ -59,3 +59,8 @@ function add(pokemon) {
     console.error('Invalid argument. The parameter must be an object containing all expected keys: name, height, and types.');
   }
 }
+
+// Function to get all Pokémon
+function getAll() {
+  return pokemonList;
+}
