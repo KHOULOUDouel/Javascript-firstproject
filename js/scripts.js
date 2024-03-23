@@ -82,3 +82,8 @@ return {
   addListItem: addListItem
 };
 })();
+
+// Use forEach loop to iterate over each Pokémon in the repository and add list items
+pokemonRepository.getAll().forEach(function(pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});
