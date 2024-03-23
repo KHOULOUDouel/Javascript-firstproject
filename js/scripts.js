@@ -86,4 +86,24 @@ return {
 // Use forEach loop to iterate over each Pokémon in the repository and add list items
 pokemonRepository.getAll().forEach(function(pokemon) {
   pokemonRepository.addListItem(pokemon);
+
+  // Check if the height is above a certain value
+  let isTall = pokemon.height > 0.6;
+
+  // Add a note if the height is above a certain value
+  if (isTall) {
+    button.innerText += " - Wow, that’s big!";
+});
+
+// Return an object with add, getAll, and addListItem functions as keys
+return {
+  add: add,
+  getAll: getAll,
+  addListItem: addListItem
+};
+})();
+
+// Use forEach loop to iterate over each Pokémon in the repository
+pokemonRepository.getAll().forEach(function(pokemon) {
+  pokemonRepository.addListItem(pokemon);
 });
