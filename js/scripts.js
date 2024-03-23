@@ -30,6 +30,9 @@ let pokemonRepository = (function() {
     button.innerText = pokemon.name;
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
+    // Add event listener to the button
+    button.addEventListener('click', function() {
+      showDetails(pokemon);
 
     // Check if the height is above a certain value
     let isTall = pokemon.height > 0.6;
@@ -40,11 +43,19 @@ let pokemonRepository = (function() {
     }
   }
 
+  // Function to show details of a Pokémon
+  function showDetails(pokemon) {
+    console.log(pokemon);
+    // More functionality will be added here later
+  }
+
+
   // Return an object with add, getAll, and addListItem functions as keys
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem
+    showDetails: showDetails
   };
 })();
 
