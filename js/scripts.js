@@ -74,3 +74,11 @@ function addListItem(pokemon) {
   listItem.appendChild(button);
   pokemonListElement.appendChild(listItem);
 }
+
+// Return an object with add, getAll, and addListItem functions as keys
+return {
+  add: add,
+  getAll: getAll,
+  addListItem: addListItem
+};
+})();
