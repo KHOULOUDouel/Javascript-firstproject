@@ -64,3 +64,13 @@ function add(pokemon) {
 function getAll() {
   return pokemonList;
 }
+
+// Function to add a list item for a Pokémon
+function addListItem(pokemon) {
+  let pokemonListElement = document.querySelector('.pokemon-list');
+  let listItem = document.createElement('li');
+  let button = document.createElement('button');
+  button.innerText = pokemon.name;
+  listItem.appendChild(button);
+  pokemonListElement.appendChild(listItem);
+}
