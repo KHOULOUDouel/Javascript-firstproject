@@ -1,0 +1,42 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: rosybrown;
+    color: bisque;
+}
+
+header {
+    padding: 30px;
+    text-align: center;
+}
+
+main {
+    padding: 10px;
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+}
+
+.pokemon-list {
+    list-style: none;
+    padding: 20px;
+}
+
+.pokemon-list li {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 20px 10px ;
+    color: brown;
+    border: none;
+border-radius: 30px;
+cursor: pointer;
+}
+
+button:hover {
+    background-color:beige ;
+}
+
+
