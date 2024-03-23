@@ -9,101 +9,46 @@ let pokemonRepository = (function() {
 
   // Define add and getAll functions
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    // Check if the parameter is an object and contains all expected keys
+    if (typeof pokemon === 'object' && pokemon !== null && 'name' in pokemon && 'height' in pokemon && 'types' in pokemon) {
+      pokemonList.push(pokemon);
+    } else {
+      // Log an error if the parameter is not valid
+      console.error('Invalid argument. The parameter must be an object containing all expected keys: name, height, and types.');
+    }
   }
 
   function getAll() {
     return pokemonList;
   }
 
-  // Return an object with add and getAll functions as keys
+  // Function to add a list item for a Pokémon
+  function addListItem(pokemon) {
+    let pokemonListElement = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    listItem.appendChild(button);
+    pokemonListElement.appendChild(listItem);
+
+    // Check if the height is above a certain value
+    let isTall = pokemon.height > 0.6;
+
+    // Add a note if the height is above a certain value
+    if (isTall) {
+      button.innerText += " - Wow, that’s big!";
+    }
+  }
+
+  // Return an object with add, getAll, and addListItem functions as keys
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
 })();
 
-// Use forEach loop to iterate over each Pokémon in the repository
-pokemonRepository.getAll().forEach(function(pokemon) {
-  let isTall = pokemon.height > 0.6;
-
-  // Use document.write() to display the Pokémon with name and height
-  document.write(`<p>${pokemon.name} (height: ${pokemon.height})`);
-
-  // Add a note if the height is above a certain value
-  if (isTall) {
-    document.write(" : Wow, that’s big!");
-  }
-});
-
-// Define add function
-function add(pokemon) {
-  // Check if the parameter is an object
-  if (typeof pokemon === 'object' && pokemon !== null) {
-    //  } else {
-    pokemonList.push(pokemon);
-  } else {
-    // Log an error if the parameter is not an object
-    console.error('Invalid argument. Only objects can be added to the pokemonList.');
-  }
-}
-
-// Define add function
-function add(pokemon) {
-  // Check if the parameter is an object and contains all expected keys
-  if (typeof pokemon === 'object' && pokemon !== null && 'name' in pokemon && 'height' in pokemon && 'types' in pokemon) {
-    // Add the pokemon to the pokemonList
-    pokemonList.push(pokemon);
-  } else {
-    // Log an error if the parameter is not valid
-    console.error('Invalid argument. The parameter must be an object containing all expected keys: name, height, and types.');
-  }
-}
-
-// Function to get all Pokémon
-function getAll() {
-  return pokemonList;
-}
-
-// Function to add a list item for a Pokémon
-function addListItem(pokemon) {
-  let pokemonListElement = document.querySelector('.pokemon-list');
-  let listItem = document.createElement('li');
-  let button = document.createElement('button');
-  button.innerText = pokemon.name;
-  listItem.appendChild(button);
-  pokemonListElement.appendChild(listItem);
-}
-
-// Return an object with add, getAll, and addListItem functions as keys
-return {
-  add: add,
-  getAll: getAll,
-  addListItem: addListItem
-};
-})();
-
 // Use forEach loop to iterate over each Pokémon in the repository and add list items
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
-
-  // Check if the height is above a certain value
-  let isTall = pokemon.height > 0.6;
-
-  // Add a note if the height is above a certain value
-  if (isTall) {
-    button.innerText += " - Wow, that’s big!";
-});
-
-// Return an object with add, getAll, and addListItem functions as keys
-return {
-  add: add,
-  getAll: getAll,
-  addListItem: addListItem
-};
-})();
-
-// Use forEach loop to iterate over each Pokémon in the repository
 pokemonRepository.getAll().forEach(function(pokemon) {
   pokemonRepository.addListItem(pokemon);
 });
