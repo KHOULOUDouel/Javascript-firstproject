@@ -33,7 +33,8 @@ let pokemonRepository = (function() {
     // Add event listener to the button
     button.addEventListener('click', function() {
       showDetails(pokemon);
-
+    });
+    
     // Check if the height is above a certain value
     let isTall = pokemon.height > 0.6;
 
@@ -49,12 +50,11 @@ let pokemonRepository = (function() {
     // More functionality will be added here later
   }
 
-
   // Return an object with add, getAll, and addListItem functions as keys
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
     showDetails: showDetails
   };
 })();
@@ -63,3 +63,5 @@ let pokemonRepository = (function() {
 pokemonRepository.getAll().forEach(function(pokemon) {
   pokemonRepository.addListItem(pokemon);
 });
+
+    
