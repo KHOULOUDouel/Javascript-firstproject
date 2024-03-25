@@ -50,19 +50,16 @@ let pokemonRepository = (function() {
     return fetch('https://pokeapi.co/api/v2/pokemon/')
       .then(response => response.json())
       .then(data => {
-        data.results.forEach(item => {
-          let pokemon = {
-            name: item.name,
-            detailsUrl: item.url
-          };
-          add(pokemon);
-        });
-      })
+        // Extract details from the API response and add them to the Pokémon object
+      pokemon.imageUrl = data.sprites.front_default;
+      pokemon.height = data.height;
+      pokemon.types = data.types.map(type => type.type.name);
+    })
       .catch(error => {
         console.error('Error loading Pokémon list:', error);
       });
   }
-  
+
   // Return an object with add, getAll, and addListItem functions as keys
   return {
     add: add,
