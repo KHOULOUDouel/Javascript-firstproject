@@ -1,7 +1,7 @@
 // Define pokemonRepository IIFE
 let pokemonRepository = (function() {
   let pokemonList = [];
-let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   // Define add and getAll functions
   function add(pokemon) {
@@ -43,8 +43,11 @@ let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
   // Function to show details of a Pokémon
   function showDetails(pokemon) {
     console.log(pokemon);
-    // More functionality will be added here later
-  }
+    // Call loadDetails() to fetch additional details
+  loadDetails(pokemon).then(function() {
+    console.log('Details loaded:', pokemon);
+  });
+}
 
   // Function to load the list of Pokémon from the API
   function loadList() {
@@ -63,6 +66,7 @@ let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
         console.error('Error loading Pokémon list:', error);
       });
   }
+  
   // Function to load details of a Pokémon
   function loadDetails(pokemon) {
     return fetch(pokemon.detailsUrl)
@@ -77,21 +81,22 @@ let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
       });
   }
 
-  // Return an object with add, getAll, and addListItem functions as keys
+  // Return an object with add, getAll, addListItem, showDetails, loadList, and loadDetails functions as keys
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
-    showDetails: showDetails
-    loadList: loadList
+    showDetails: showDetails,
+    loadList: loadList,
     loadDetails: loadDetails
   };
 })();
+
 // Load the list of Pokémon from the API
 pokemonRepository.loadList().then(function() {
-// Use forEach loop to iterate over each Pokémon in the repository and add list items
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
+  // Use forEach loop to iterate over each Pokémon in the repository and add list items
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
-
     
