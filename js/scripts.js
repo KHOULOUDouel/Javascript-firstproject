@@ -1,6 +1,7 @@
 // Define pokemonRepository IIFE
 let pokemonRepository = (function() {
   let pokemonList = [];
+let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   // Define add and getAll functions
   function add(pokemon) {
@@ -47,16 +48,32 @@ let pokemonRepository = (function() {
 
   // Function to load the list of Pokémon from the API
   function loadList() {
-    return fetch(pokemon.detailsUrl)
-    .then(response => response.json())
+    return fetch(apiUrl)
+      .then(response => response.json())
       .then(data => {
-        // Extract details from the API response and add them to the Pokémon object
-      pokemon.imageUrl = data.sprites.front_default;
-      pokemon.height = data.height;
-      pokemon.types = data.types.map(type => type.type.name);
-    })
+        data.results.forEach(pokemon => {
+          let pokemonObject = {
+            name: pokemon.name,
+            detailsUrl: pokemon.url
+          };
+          add(pokemonObject);
+        });
+      })
       .catch(error => {
         console.error('Error loading Pokémon list:', error);
+      });
+  }
+  // Function to load details of a Pokémon
+  function loadDetails(pokemon) {
+    return fetch(pokemon.detailsUrl)
+      .then(response => response.json())
+      .then(data => {
+        pokemon.imageUrl = data.sprites.front_default;
+        pokemon.height = data.height;
+        pokemon.types = data.types.map(type => type.type.name);
+      })
+      .catch(error => {
+        console.error('Error loading Pokémon details:', error);
       });
   }
 
@@ -66,9 +83,12 @@ let pokemonRepository = (function() {
     getAll: getAll,
     addListItem: addListItem,
     showDetails: showDetails
+    loadList: loadList
+    loadDetails: loadDetails
   };
 })();
-
+// Load the list of Pokémon from the API
+pokemonRepository.loadList().then(function() {
 // Use forEach loop to iterate over each Pokémon in the repository and add list items
 pokemonRepository.getAll().forEach(function(pokemon) {
   pokemonRepository.addListItem(pokemon);
