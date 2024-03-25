@@ -45,6 +45,24 @@ let pokemonRepository = (function() {
     // More functionality will be added here later
   }
 
+  // Function to load the list of Pokémon from the API
+  function loadList() {
+    return fetch('https://pokeapi.co/api/v2/pokemon/')
+      .then(response => response.json())
+      .then(data => {
+        data.results.forEach(item => {
+          let pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          add(pokemon);
+        });
+      })
+      .catch(error => {
+        console.error('Error loading Pokémon list:', error);
+      });
+  }
+  
   // Return an object with add, getAll, and addListItem functions as keys
   return {
     add: add,
