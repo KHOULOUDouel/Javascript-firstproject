@@ -47,8 +47,8 @@ let pokemonRepository = (function() {
 
   // Function to load the list of Pokémon from the API
   function loadList() {
-    return fetch('https://pokeapi.co/api/v2/pokemon/')
-      .then(response => response.json())
+    return fetch(pokemon.detailsUrl)
+    .then(response => response.json())
       .then(data => {
         // Extract details from the API response and add them to the Pokémon object
       pokemon.imageUrl = data.sprites.front_default;
