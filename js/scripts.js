@@ -30,7 +30,7 @@ let pokemonRepository = (function() {
     button.addEventListener('click', function() {
       showDetails(pokemon);
     });
-    
+
     // Check if the height is above a certain value
     let isTall = pokemon.height > 0.6;
 
@@ -44,13 +44,14 @@ let pokemonRepository = (function() {
   function showDetails(pokemon) {
     console.log(pokemon);
     // Call loadDetails() to fetch additional details
-  loadDetails(pokemon).then(function() {
-    console.log('Details loaded:', pokemon);
-  });
-}
+    loadDetails(pokemon).then(function() {
+      console.log('Details loaded:', pokemon);
+      // More functionality will be added here later
+    });
+  }
 
   // Function to load the list of Pokémon from the API
-  function loadList() {
+  function LoadList() {
     return fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
@@ -66,7 +67,7 @@ let pokemonRepository = (function() {
         console.error('Error loading Pokémon list:', error);
       });
   }
-  
+
   // Function to load details of a Pokémon
   function loadDetails(pokemon) {
     return fetch(pokemon.detailsUrl)
@@ -81,22 +82,21 @@ let pokemonRepository = (function() {
       });
   }
 
-  // Return an object with add, getAll, addListItem, showDetails, loadList, and loadDetails functions as keys
+  // Return an object with add, getAll, addListItem, showDetails, LoadList, and loadDetails functions as keys
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
     showDetails: showDetails,
-    loadList: loadList,
+    LoadList: LoadList,
     loadDetails: loadDetails
   };
 })();
 
 // Load the list of Pokémon from the API
-pokemonRepository.loadList().then(function() {
+pokemonRepository.LoadList().then(function() {
   // Use forEach loop to iterate over each Pokémon in the repository and add list items
   pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
 });
-    
