@@ -2,7 +2,19 @@
 let pokemonRepository = (function() {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-
+  // Function to display loading message
+  function showLoadingMessage() {
+    let loadingMessage = document.createElement('div');
+    loadingMessage.innerText = 'Loading...';
+    document.body.appendChild(loadingMessage);
+  }
+  // Function to hide loading message
+  function hideLoadingMessage() {
+    let loadingMessage = document.querySelector('.loading-message');
+    if (loadingMessage) {
+      loadingMessage.remove();
+    }
+  }
   // Define add and getAll functions
   function add(pokemon) {
     // Check if the parameter is an object and contains all expected keys
@@ -42,10 +54,11 @@ let pokemonRepository = (function() {
 
   // Function to show details of a Pokémon
   function showDetails(pokemon) {
+    showLoadingMessage();
     console.log(pokemon);
-    // Call loadDetails() to fetch additional details
     loadDetails(pokemon).then(function() {
       console.log('Details loaded:', pokemon);
+      hideLoadingMessage();
       // More functionality will be added here later
     });
   }
@@ -65,6 +78,7 @@ let pokemonRepository = (function() {
       })
       .catch(error => {
         console.error('Error loading Pokémon list:', error);
+        hideLoadingMessage();
       });
   }
 
@@ -76,9 +90,11 @@ let pokemonRepository = (function() {
         pokemon.imageUrl = data.sprites.front_default;
         pokemon.height = data.height;
         pokemon.types = data.types.map(type => type.type.name);
+        hideLoadingMessage();
       })
       .catch(error => {
         console.error('Error loading Pokémon details:', error);
+        hideLoadingMessage();
       });
   }
 
@@ -90,6 +106,8 @@ let pokemonRepository = (function() {
     showDetails: showDetails,
     LoadList: LoadList,
     loadDetails: loadDetails
+    showLoadingMessage: showLoadingMessage,
+    hideLoadingMessage: hideLoadingMessage
   };
 })();
 
