@@ -141,7 +141,39 @@ let pokemonRepository = (function () {
     }
   });
 
-  // Return an object with add, getAll, addListItem, showDetails, LoadList, and loadDetails functions as keys
+  // Function to show the modal
+function showModal(pokemon) {
+  // Create modal
+  let modal = document.createElement("div");
+  modal.classList.add("modal");
+
+  // Create modal content
+  let modalContent = document.createElement("div");
+  modalContent.classList.add("modal-content");
+  modalContent.innerText = `You clicked on ${pokemon.name}!`;
+
+  // Append modal content to modal
+  modal.appendChild(modalContent);
+
+  // Append modal to body
+  document.body.appendChild(modal);
+
+  // Attach event listener to hide modal when clicking outside of it
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      hideModal();
+    }
+  });
+
+  // Attach event listener to hide modal when pressing Escape key
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      hideModal();
+    }
+  });
+}
+  
+// Return an object with add, getAll, addListItem, showDetails, LoadList, and loadDetails functions as keys
   return {
     add: add,
     getAll: getAll,
