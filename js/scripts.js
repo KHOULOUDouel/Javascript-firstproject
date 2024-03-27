@@ -117,13 +117,47 @@ let pokemonRepository = (function () {
     // Create modal content
     let modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
-    modalContent.innerText = `You clicked on ${pokemon.name}!`;
+    
+    // Add name and height information to modal content
+    let nameElement = document.createElement("p");
+    nameElement.innerText = "Name: " + pokemon.name;
+    modalContent.appendChild(nameElement);
+
+    let heightElement = document.createElement("p");
+    heightElement.innerText = "Height: " + pokemon.height;
+    modalContent.appendChild(heightElement);
+
+    // Create image element
+    let container = document.querySelector('#image-container');
+
+// Create an <img> element
+let myImage = document.createElement('img');
+
+// setting `src` property to set the actual element's `src` attribute
+// this also works on <img> elements selected by querySelector() method, it is not specific for <img> elements created with createElement() methods
+myImage.src = 'https://static.printler.com/cache/0/5/1/f/9/e/051f9e6cbcb744491cf7caf4f51c9a3d61356d7e.jpg';
+
+container.appendChild(myImage);
 
     // Append modal content to modal
     modal.appendChild(modalContent);
 
     // Append modal to body
     document.body.appendChild(modal);
+
+    // Attach event listener to hide modal when clicking outside of it
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        hideModal();
+      }
+    });
+
+    // Attach event listener to hide modal when pressing Escape key
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        hideModal();
+      }
+    });
   }
 
   // Function to hide the modal
@@ -134,67 +168,7 @@ let pokemonRepository = (function () {
     }
   }
 
-  // Attach event listener to hide modal
-  document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("modal")) {
-      hideModal();
-    }
-  });
-
-  // Function to show the modal
-function showModal(pokemon) {
-  // Create modal
-  let modal = document.createElement("div");
-  modal.classList.add("modal");
-
-  // Create modal content
-  let modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
-  
-  // Add name and height information to modal content
-  let nameElement = document.createElement("p");
-  nameElement.innerText = "Name: " + pokemon.name;
-  modalContent.appendChild(nameElement);
-
-  let heightElement = document.createElement("p");
-  heightElement.innerText = "Height: " + pokemon.height;
-  modalContent.appendChild(heightElement);
-
-  // Get the container element
-let container = document.querySelector('#image-container');
-
-// Create an <img> element
-let myImage = document.createElement('img');
-
-// Set the src attribute of the image
-myImage.src = 'https://images.app.goo.gl/6pzTVg7MWa34DVpB9'; 
-
-// Append the image to the container
-container.appendChild(myImage);
-
-  // Append modal content to modal
-  modal.appendChild(modalContent);
-
-  // Append modal to body
-  document.body.appendChild(modal);
-}
-
-  // Attach event listener to hide modal when clicking outside of it
-  modal.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      hideModal();
-    }
-  });
-
-  // Attach event listener to hide modal when pressing Escape key
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      hideModal();
-    }
-  });
-}
-  
-// Return an object with add, getAll, addListItem, showDetails, LoadList, and loadDetails functions as keys
+  // Return an object with add, getAll, addListItem, showDetails, LoadList, and loadDetails functions as keys
   return {
     add: add,
     getAll: getAll,
