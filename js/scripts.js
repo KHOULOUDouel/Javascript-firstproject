@@ -160,11 +160,17 @@ function showModal(pokemon) {
   heightElement.innerText = "Height: " + pokemon.height;
   modalContent.appendChild(heightElement);
 
-  // Create img element for displaying the Pokémon image
-  let imgElement = document.createElement("img");
-  imgElement.src = pokemon.imageUrl;
-  imgElement.alt = pokemon.name;
-  modalContent.appendChild(imgElement);
+  // Get the container element
+let container = document.querySelector('#image-container');
+
+// Create an <img> element
+let myImage = document.createElement('img');
+
+// Set the src attribute of the image
+myImage.src = 'https://printler.com/fr/affiche/152131/image.jpg'; 
+
+// Append the image to the container
+container.appendChild(myImage);
 
   // Append modal content to modal
   modal.appendChild(modalContent);
