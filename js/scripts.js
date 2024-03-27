@@ -150,13 +150,22 @@ function showModal(pokemon) {
   // Create modal content
   let modalContent = document.createElement("div");
   modalContent.classList.add("modal-content");
-  modalContent.innerText = `You clicked on ${pokemon.name}!`;
+  
+  // Add name and height information to modal content
+  let nameElement = document.createElement("p");
+  nameElement.innerText = "Name: " + pokemon.name;
+  modalContent.appendChild(nameElement);
+
+  let heightElement = document.createElement("p");
+  heightElement.innerText = "Height: " + pokemon.height;
+  modalContent.appendChild(heightElement);
 
   // Append modal content to modal
   modal.appendChild(modalContent);
 
   // Append modal to body
   document.body.appendChild(modal);
+}
 
   // Attach event listener to hide modal when clicking outside of it
   modal.addEventListener("click", function (event) {
