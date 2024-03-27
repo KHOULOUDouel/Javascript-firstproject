@@ -167,7 +167,7 @@ let container = document.querySelector('#image-container');
 let myImage = document.createElement('img');
 
 // Set the src attribute of the image
-myImage.src = 'https://printler.com/fr/affiche/152131/image.jpg'; 
+myImage.src = 'https://images.app.goo.gl/6pzTVg7MWa34DVpB9'; 
 
 // Append the image to the container
 container.appendChild(myImage);
