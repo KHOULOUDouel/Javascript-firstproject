@@ -66,9 +66,9 @@ let pokemonRepository = (function () {
 
   // Function to show details of a Pokémon
   function showDetails(pokemon) {
-    showModal(pokemon);
     loadDetails(pokemon).then(function () {
       console.log("Details loaded:", pokemon);
+      showModal(pokemon);
       // More functionality will be added here later
     });
   }
@@ -108,64 +108,67 @@ let pokemonRepository = (function () {
       })
       .finally(() => hideLoadingMessage());
   }
+
+
   // Function to show the modal
   function showModal(pokemon) {
+    const modalContainer = document.querySelector("#modal-container")
+    // Clear all existing modal content
+    modalContainer.innerHTML = '';
+
     // Create modal
     let modal = document.createElement("div");
     modal.classList.add("modal");
 
-    // Create modal content
-    let modalContent = document.createElement("div");
-    modalContent.classList.add("modal-content");
-    
+    // Add the new modal content
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    closeButtonElement.addEventListener('click', hideModal);
+
     // Add name and height information to modal content
-    let nameElement = document.createElement("p");
-    nameElement.innerText = "Name: " + pokemon.name;
-    modalContent.appendChild(nameElement);
+    let titleElement = document.createElement("h1");
+    titleElement.innerText = "Name: " + pokemon.name;
 
     let heightElement = document.createElement("p");
     heightElement.innerText = "Height: " + pokemon.height;
-    modalContent.appendChild(heightElement);
 
-    // Create image element
-    let container = document.querySelector('#image-container');
+    // Create an <img> element
+    let imageElement = document.createElement('img');
+    imageElement.setAttribute('src', pokemon.imageUrl);
 
-// Create an <img> element
-let myImage = document.createElement('img');
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(heightElement);
+    modal.appendChild(imageElement);
 
-// setting `src` property to set the actual element's `src` attribute
-// this also works on <img> elements selected by querySelector() method, it is not specific for <img> elements created with createElement() methods
-myImage.src = 'https://static.printler.com/cache/0/5/1/f/9/e/051f9e6cbcb744491cf7caf4f51c9a3d61356d7e.jpg';
+    // Append modal to its container
+    modalContainer.appendChild(modal);
 
-container.appendChild(myImage);
+    modalContainer.classList.add('is-visible');
 
-    // Append modal content to modal
-    modal.appendChild(modalContent);
-
-    // Append modal to body
-    document.body.appendChild(modal);
-
-    // Attach event listener to hide modal when clicking outside of it
-    modal.addEventListener("click", function (event) {
-      if (event.target === modal) {
-        hideModal();
-      }
-    });
-
-    // Attach event listener to hide modal when pressing Escape key
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") {
+    modalContainer.addEventListener('click', (e) => {
+      // Since this is also triggered when clicking INSIDE the modal
+      // We only want to close if the user clicks directly on the overlay
+      let target = e.target;
+      if (target === modalContainer) {
         hideModal();
       }
     });
   }
 
+  // Attach event listener to hide modal when pressing Escape key
+  window.addEventListener('keydown', (e) => {
+    let modalContainer = document.querySelector('#modal-container');
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
+  });
+
   // Function to hide the modal
   function hideModal() {
-    let modal = document.querySelector(".modal");
-    if (modal) {
-      modal.remove();
-    }
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
   }
 
   // Return an object with add, getAll, addListItem, showDetails, LoadList, and loadDetails functions as keys
