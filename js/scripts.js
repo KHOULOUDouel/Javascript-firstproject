@@ -49,9 +49,10 @@ function addListItem(pokemon) {
   listItem.append(button);
   pokemonListElement.append(listItem);
 
-  // Add 'list-group-item' class to the dynamically created <li> element
+  // Add 'list-group-item' class to the dynamically created <li> element and <button> elements
   listItem.addClass("list-group-item");
-
+  button.addClass("btn btn-primary");
+  
   // Add event listener to the button
   button.on("click", function () {
     showDetails(pokemon);
