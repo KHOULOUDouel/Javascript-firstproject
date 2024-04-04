@@ -42,27 +42,29 @@ let pokemonRepository = (function () {
   }
 
   // Function to add a list item for a Pokémon
-  function addListItem(pokemon) {
-    let pokemonListElement = document.querySelector(".pokemon-list");
-    let listItem = document.createElement("li");
-    let button = document.createElement("button");
-    button.innerText = pokemon.name;
-    listItem.appendChild(button);
-    pokemonListElement.appendChild(listItem);
+function addListItem(pokemon) {
+  let pokemonListElement = $(".pokemon-list");
+  let listItem = $("<li></li>");
+  let button = $("<button></button>").text(pokemon.name);
+  listItem.append(button);
+  pokemonListElement.append(listItem);
 
-    // Add event listener to the button
-    button.addEventListener("click", function () {
-      showDetails(pokemon);
-    });
+  // Add 'list-group-item' class to the dynamically created <li> element
+  listItem.addClass("list-group-item");
 
-    // Check if the height is above a certain value
-    let isTall = pokemon.height > 0.6;
+  // Add event listener to the button
+  button.on("click", function () {
+    showDetails(pokemon);
+  });
 
-    // Add a note if the height is above a certain value
-    if (isTall) {
-      button.innerText += " - Wow, that’s big!";
-    }
+  // Check if the height is above a certain value
+  let isTall = pokemon.height > 0.6;
+
+  // Add a note if the height is above a certain value
+  if (isTall) {
+    button.text(pokemon.name + " - Wow, that’s big!");
   }
+}
 
   // Function to show details of a Pokémon
   function showDetails(pokemon) {
