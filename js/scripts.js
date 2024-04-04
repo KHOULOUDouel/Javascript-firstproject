@@ -42,17 +42,19 @@ let pokemonRepository = (function () {
   }
 
   // Function to add a list item for a Pokémon
-function addListItem(pokemon) {
-  let pokemonListElement = $(".pokemon-list");
-  let listItem = $("<li></li>");
-  let button = $("<button></button>").text(pokemon.name);
-  listItem.append(button);
-  pokemonListElement.append(listItem);
+  function addListItem(pokemon) {
+    let pokemonListElement = document.querySelector(".pokemon-list");
+    let listItem = document.createElement("li");
+    listItem.classList.add("list-group-item"); // Add Bootstrap list-group-item class
+    let button = document.createElement("button");
+    button.classList.add("btn", "btn-primary"); // Add Bootstrap button classes
+    button.innerText = pokemon.name;
+    button.setAttribute("data-toggle", "modal"); // Add data-toggle attribute
+    button.setAttribute("data-target", "#pokemonModal"); // Add data-target attribute
+    listItem.appendChild(button);
+    pokemonListElement.appendChild(listItem);
 
-  // Add 'list-group-item' class to the dynamically created <li> element and <button> elements
-  listItem.addClass("list-group-item");
-  button.addClass("btn btn-primary");
-  
+
   // Add event listener to the button
   button.on("click", function () {
     showDetails(pokemon);
