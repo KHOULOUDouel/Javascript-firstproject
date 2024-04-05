@@ -55,7 +55,7 @@ let pokemonRepository = (function () {
     pokemonListElement.appendChild(listItem);
 
     // Add event listener to the button
-    button.on("click", function () {
+    $(button).on("click", function () {
       showDetails(pokemon);
     });
 
