@@ -114,52 +114,30 @@ let pokemonRepository = (function () {
   }
 
   // Function to show the modal
-  function showModal(pokemon) {
-    const modalContainer = document.querySelector("#modal-container");
-    // Clear all existing modal content
-    modalContainer.innerHTML = "";
+function showModal(pokemon) {
+  let modalBody = $('.modal-body');
+  let modalTitle = $('.modal-title');
 
-    // Create modal
-    let modal = document.createElement("div");
-    modal.classList.add("modal");
+  // Clear existing content
+  modalBody.empty();
+  modalTitle.empty();
 
-    // Add the new modal content
-    let closeButtonElement = document.createElement("button");
-    closeButtonElement.classList.add("modal-close");
-    closeButtonElement.innerText = "Close";
-    closeButtonElement.addEventListener("click", hideModal);
+  // Set modal title
+  modalTitle.text(pokemon.name);
 
-    // Add name and height information to modal content
-    let titleElement = document.createElement("h1");
-    titleElement.innerText = "Name: " + pokemon.name;
+  // Create and set image element
+  let imageElement = $('<img class="modal-img">').attr('src', pokemon.imageUrl);
 
-    let heightElement = document.createElement("p");
-    heightElement.innerText = "Height: " + pokemon.height;
+  // Create and set height element
+  let heightElement = $('<p>').html('<strong>Height:</strong> ' + pokemon.height);
 
-    // Create an <img> element
-    let imageElement = document.createElement("img");
-    imageElement.setAttribute("src", pokemon.imageUrl);
+  // Append elements to the modal body
+  modalBody.append(imageElement);
+  modalBody.append(heightElement);
 
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(heightElement);
-    modal.appendChild(imageElement);
-
-    // Append modal to its container
-    modalContainer.appendChild(modal);
-
-    modalContainer.classList.add("is-visible");
-
-    modalContainer.addEventListener("click", (e) => {
-      // Since this is also triggered when clicking INSIDE the modal
-      // We only want to close if the user clicks directly on the overlay
-      let target = e.target;
-      if (target === modalContainer) {
-        hideModal();
-      }
-    });
-  }
-
+  // Show the modal
+  $('#pokemonModal').modal('show');
+}
   // Attach event listener to hide modal when pressing Escape key
   window.addEventListener("keydown", (e) => {
     let modalContainer = document.querySelector("#modal-container");
