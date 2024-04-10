@@ -1,4 +1,4 @@
-// Define pokemonRepository IIFE
+//  Define pokemonRepository IIFE
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
@@ -78,11 +78,12 @@ let pokemonRepository = (function () {
   }
 
   // Function to load the list of Pokémon from the API
-  function LoadList() {
+  async function LoadList() {
     showLoadingMessage();
-    return fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
+    try {
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
         data.results.forEach((pokemon) => {
           let pokemonObject = {
             name: pokemon.name,
@@ -90,54 +91,62 @@ let pokemonRepository = (function () {
           };
           add(pokemonObject);
         });
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error loading Pokémon list:", error);
-      })
-      .finally(() => hideLoadingMessage());
+      }
+    } finally {
+      return hideLoadingMessage();
+    }
   }
 
   // Function to load details of a Pokémon
-  function loadDetails(pokemon) {
+  async function loadDetails(pokemon) {
     showLoadingMessage();
-    return fetch(pokemon.detailsUrl)
-      .then((response) => response.json())
-      .then((data) => {
+    try {
+      try {
+        const response = await fetch(pokemon.detailsUrl);
+        const data = await response.json();
         pokemon.imageUrl = data.sprites.front_default;
         pokemon.height = data.height;
         pokemon.types = data.types.map((type) => type.type.name);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error loading Pokémon details:", error);
-      })
-      .finally(() => hideLoadingMessage());
+      }
+    } finally {
+      return hideLoadingMessage();
+    }
   }
 
   // Function to show the modal
-function showModal(pokemon) {
-  let modalBody = $('.modal-body');
-  let modalTitle = $('.modal-title');
+  function showModal(pokemon) {
+    let modalBody = $(".modal-body");
+    let modalTitle = $(".modal-title");
 
-  // Clear existing content
-  modalBody.empty();
-  modalTitle.empty();
+    // Clear existing content
+    modalBody.empty();
+    modalTitle.empty();
 
-  // Set modal title
-  modalTitle.text(pokemon.name);
+    // Set modal title
+    modalTitle.text(pokemon.name);
 
-  // Create and set image element
-  let imageElement = $('<img class="modal-img">').attr('src', pokemon.imageUrl);
+    // Create and set image element
+    let imageElement = $('<img class="modal-img">').attr(
+      "src",
+      pokemon.imageUrl
+    );
 
-  // Create and set height element
-  let heightElement = $('<p>').html('<strong>Height:</strong> ' + pokemon.height);
+    // Create and set height element
+    let heightElement = $("<p>").html(
+      "<strong>Height:</strong> " + pokemon.height
+    );
 
-  // Append elements to the modal body
-  modalBody.append(imageElement);
-  modalBody.append(heightElement);
+    // Append elements to the modal body
+    modalBody.append(imageElement);
+    modalBody.append(heightElement);
 
-  // Show the modal
-  $('#pokemonModal').modal('show');
-}
+    // Show the modal
+    $("#pokemonModal").modal("show");
+  }
   // Attach event listener to hide modal when pressing Escape key
   window.addEventListener("keydown", (e) => {
     let modalContainer = document.querySelector("#modal-container");
