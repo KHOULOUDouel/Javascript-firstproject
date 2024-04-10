@@ -181,3 +181,4 @@ pokemonRepository.LoadList().then(function () {
     pokemonRepository.addListItem(pokemon);
   });
 });
+

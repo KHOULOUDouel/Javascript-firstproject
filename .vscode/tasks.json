@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Lint and Minify JavaScript",
+            "type": "shell",
+            "command": "eslint src/**/*.js && uglifyjs src/**/*.js -o dist/bundle.min.js --compress --mangle",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
